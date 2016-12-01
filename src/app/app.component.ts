@@ -12,26 +12,25 @@ export class AppComponent {
   word = 'hippopotamus'.toUpperCase().split('');
   already_tried = [];
   guessed_letters = [];
-  match_found = false;
   lifes = 6;
   dead = false;
 
   onLetterSelected(e){
     this.selected_letter = e.target.innerText;
     console.log(this.selected_letter);
-    this.addToList(this.already_tried, this.selected_letter);
     this.checkForMatch();
+    this.addToList(this.already_tried, this.selected_letter);
   }
   checkForMatch(){
   	var letter = this.selected_letter;
-  	if (this.word.indexOf(letter) == -1 && this.word.indexOf(letter.toLowerCase()) == -1){
-	    this.match_found = false;
+  	if (this.word.indexOf(letter) == -1
+  		&& this.word.indexOf(letter.toLowerCase()) == -1
+  		&& this.already_tried.indexOf(letter) == -1){
+  		// no Match and letter is not among the selected
 	    this.hang();
-	    console.log('match not found: ' + letter)
 	} else {
-		this.match_found = true;
-	    console.log('match found: ' + letter)
 	    this.addToList(this.guessed_letters, this.selected_letter)
+	    // Match found!
 	};
   };
   hang(){
