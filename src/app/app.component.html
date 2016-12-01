@@ -11,3 +11,8 @@
 
 <p *ngIf="match_found"><b>Match found!</b></p>
 <p *ngIf="dead"><b>C'est la vie</b></p>
+
+<span *ngFor="let letter of word">
+	<button *ngIf="guessed_letters.indexOf(letter) > -1">{{letter}}</button>
+	<button *ngIf="guessed_letters.indexOf(letter) == -1">_</button>
+</span>

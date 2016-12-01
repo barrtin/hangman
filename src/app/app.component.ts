@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Hangman (Simple)';
+  title = 'Hangman v0.1';
   alphabet_chars = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z'.split(',');
   selected_letter = '';
-  word = 'hippopotamus';
+  word = 'hippopotamus'.toUpperCase().split('');
   already_tried = [];
   guessed_letters = [];
   match_found = false;
@@ -31,6 +31,7 @@ export class AppComponent {
 	} else {
 		this.match_found = true;
 	    console.log('match found: ' + letter)
+	    this.guessed_letters.push(this.selected_letter)
 	};
   };
   hang(){
@@ -38,5 +39,9 @@ export class AppComponent {
   	if (this.lifes == 0){
   		this.dead = true;
   	};
+  }
+  ngOnInit(){
+    this.guessed_letters.push(this.word[0])
+    this.guessed_letters.push(this.word[this.word.length-1])
   }
 }
