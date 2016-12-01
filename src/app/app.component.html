@@ -1,3 +1,13 @@
-<h1>
-  {{title}}
-</h1>
+<h1>{{title}}</h1>
+<button
+	*ngFor="let letter of alphabet_chars"
+	(click)="onLetterSelected($event)"
+>{{letter}}</button>
+
+
+<p>Selected letter: {{selected_letter}}</p>
+<p>Already tried: {{already_tried}}</p>
+<p>You have <b>{{lifes}}</b> lifes left.</p>
+
+<p *ngIf="match_found"><b>Match found!</b></p>
+<p *ngIf="dead"><b>C'est la vie</b></p>
