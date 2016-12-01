@@ -19,8 +19,8 @@ export class AppComponent {
   onLetterSelected(e){
     this.selected_letter = e.target.innerText;
     console.log(this.selected_letter);
-    this.already_tried.push(this.selected_letter);
-    this.checkForMatch()
+    this.addToList(this.already_tried, this.selected_letter);
+    this.checkForMatch();
   }
   checkForMatch(){
   	var letter = this.selected_letter;
@@ -31,7 +31,7 @@ export class AppComponent {
 	} else {
 		this.match_found = true;
 	    console.log('match found: ' + letter)
-	    this.guessed_letters.push(this.selected_letter)
+	    this.addToList(this.guessed_letters, this.selected_letter)
 	};
   };
   hang(){
@@ -43,5 +43,13 @@ export class AppComponent {
   ngOnInit(){
     this.guessed_letters.push(this.word[0])
     this.guessed_letters.push(this.word[this.word.length-1])
+  }
+
+  addToList(list, item){
+  	// keep the list unique
+  	// this should be "utils" function one day
+  	if (list.indexOf(item) == -1){
+  		list.push(item)
+  	}
   }
 }
