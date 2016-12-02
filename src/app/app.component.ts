@@ -14,6 +14,7 @@ export class AppComponent {
   guessed_letters = [];
   lifes = 6;
   dead = false;
+  win = false;
 
   onLetterSelected(e){
     this.selected_letter = e.target.innerText;
@@ -24,14 +25,31 @@ export class AppComponent {
   checkForMatch(){
   	var letter = this.selected_letter;
   	if (this.word.indexOf(letter) == -1
-  		&& this.word.indexOf(letter.toLowerCase()) == -1
   		&& this.already_tried.indexOf(letter) == -1){
-  		// no Match and letter is not among the selected
+  		// no Match and letter is not tried
 	    this.hang();
 	} else {
 	    this.addToList(this.guessed_letters, this.selected_letter)
+	    this.checkSuccess()
 	    // Match found!
 	};
+  };
+  findInList(item, list){
+  	if (list.indexOf(item) > -1){
+  		return true;
+  	} else {
+  		return false;
+  	}
+  }
+  checkSuccess(){
+  	var word_letters = new Set(this.word);
+  	// find the letters that remained not guessed
+  	var letters_not_guessed = Array.from(word_letters).filter((item) => {
+  		return !this.findInList(item, this.guessed_letters);
+  	})
+  	if (letters_not_guessed.length == 0){
+  		this.win = true;
+  	}
   };
   hang(){
   	this.lifes--;
