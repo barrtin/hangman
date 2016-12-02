@@ -1,6 +1,6 @@
-<h1>{{title}}</h1>
+<h1>Hangman v0.1</h1>
 
-<div *ngIf="!win">
+<div *ngIf="!win && !dead">
 	<button
 		*ngFor="let letter of alphabet_chars"
 		(click)="onLetterSelected($event)"
@@ -12,8 +12,8 @@
 	<p>You have <b>{{lifes}}</b> lifes left.</p>
 
 	<p *ngIf="match_found"><b>Match found!</b></p>
-	<p *ngIf="dead"><b>C'est la vie</b></p>
 </div>
+<p *ngIf="dead"><b>C'est la vie</b></p>
 <p *ngIf="win"><b>You rock!</b></p>
 
 <span *ngFor="let letter of word">
