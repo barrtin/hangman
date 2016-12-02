@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   alphabet_chars = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z'.split(',');
-  word = 'hippopotamus'.toUpperCase().split('');
+  word;
   selected_letter = '';
   already_tried = [];
   guessed_letters = [];
@@ -47,6 +47,7 @@ export class AppComponent {
     };
   }
   ngOnInit(){
+    this._getRandomWord()
     this.guessed_letters.push(this.word[0])
     this.guessed_letters.push(this.word[this.word.length-1])
   }
@@ -62,5 +63,10 @@ export class AppComponent {
     if (list.indexOf(item) == -1){
         list.push(item)
     }
+  }
+  _getRandomWord(){
+    var words = ['hippopotamus', 'elephant', 'monkey', 'crocodile', 'spider', 'frog', 'antelope'];
+    var word = words[Math.floor(Math.random() * words.length)];
+    this.word = word.toUpperCase().split('');
   }
 }
