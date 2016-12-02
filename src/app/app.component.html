@@ -20,3 +20,5 @@
 	<button *ngIf="guessed_letters.indexOf(letter) > -1">{{letter}}</button>
 	<button *ngIf="guessed_letters.indexOf(letter) == -1">_</button>
 </span>
+<br><br><br><br><br>
+<button *ngIf="win || dead" (click)="initializeGame()">Play again</button>

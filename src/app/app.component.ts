@@ -7,13 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   alphabet_chars = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z'.split(',');
+  // set types
   word;
-  selected_letter = '';
-  already_tried = [];
-  guessed_letters = [];
-  lifes = 6;
-  dead = false;
-  win = false;
+  selected_letter;
+  already_tried;
+  guessed_letters;
+  lifes;
+  dead;
+  win;
 
   onLetterSelected(e){
     this.selected_letter = e.target.innerText;
@@ -47,6 +48,16 @@ export class AppComponent {
     };
   }
   ngOnInit(){
+    this.initializeGame();
+  }
+
+  initializeGame(){
+    this.selected_letter = '';
+    this.already_tried = [];
+    this.guessed_letters = [];
+    this.lifes = 6;
+    this.dead = false;
+    this.win = false;
     this._getRandomWord()
     this.guessed_letters.push(this.word[0])
     this.guessed_letters.push(this.word[this.word.length-1])
